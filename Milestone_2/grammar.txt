@@ -1,0 +1,46 @@
+expression = logical_expression
+
+logical_expression = logical_expression ("&&" | "||") bitwise_shift_expression
+    | bitwise_shift_expression
+
+bitwise_shift_expression = bitwise_shift_expression ("<<" | ">>") bitwise_expression 
+    | bitwise_expression
+
+bitwise_expression = bitwise_expression ("&" | "|" | "^") relational_expression
+    | relational_expression
+
+relational_expression = relational_expression ("<" | "<=" | ">" | ">=" | "==" | "!=") additive_expression
+    | additive_expression
+
+additive_expression = additive_expression ("+" | "-") multiplicative_expression
+    | multiplicative_expression
+
+multiplicative_expression = multiplicative_expression("*" | "/" | "%") exponentiation
+    | exponentiation
+
+exponentiation = unary_expression "**" exponentiation
+    | primary_expression
+
+primary_expression 
+    = integer
+    | float
+    | string
+    | cell_address
+    | boolean
+
+    | "-" primary_expression
+    | "~" primary_expression
+    | "!" primary_expression
+
+    | "(" primary_expression ")"
+
+    | cellLvalue primary_expression
+    | cellRvalue primary_expression
+
+    | InttoFloat primary_expression
+    | FloattoInt primary_expression
+
+    | max primary_expression
+    | min primary_expression
+    | mean primary_expression
+    | sum primary_expression
